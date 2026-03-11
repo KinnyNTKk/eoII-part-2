@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EOII Part 2 — Situational Questions Flash Cards</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: #0C0C18;
+    font-family: 'Georgia', serif;
+    color: #E2E8F0;
+    padding: 24px 16px 48px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .bg-grid {
+    position: fixed; inset: 0; pointer-events: none; opacity: 0.025;
+    background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .wrap { width: 100%; max-width: 720px; position: relative; z-index: 1; }
+
+  /* HEADER */
+  .hd { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+  .eyebrow { font-size: 10px; letter-spacing: 3px; color: #475569; text-transform: uppercase; font-family: sans-serif; margin-bottom: 5px; }
+  h1 { font-size: 24px; font-weight: 700; color: #F1F5F9; letter-spacing: -0.4px; }
+  .prog-btn {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 7px 16px; color: #94A3B8; font-size: 11px;
+    cursor: pointer; font-family: sans-serif; white-space: nowrap;
+  }
+
+  /* CATEGORY FILTERS */
+  .cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+  .cat-btn {
+    padding: 5px 13px; border-radius: 16px; font-size: 11px; font-family: sans-serif;
+    cursor: pointer; transition: all 0.18s; border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04); color: #64748B;
+  }
+  .cat-btn.active { color: #fff; font-weight: 600; }
+
+  /* META */
+  .meta-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .meta-left { font-size: 11px; color: #475569; font-family: sans-serif; }
+  .cat-tag { font-size: 10px; font-family: sans-serif; font-weight: 600; padding: 3px 11px; border-radius: 10px; letter-spacing: 0.5px; }
+  .bar-track { height: 2px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-bottom: 18px; }
+  .bar-fill { height: 100%; border-radius: 2px; transition: width 0.35s ease; }
+
+  /* CARD */
+  .card {
+    border-radius: 20px; padding: 30px 34px;
+    background: linear-gradient(145deg, #16162A, #0C0C1E);
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 0 20px 55px rgba(0,0,0,0.55);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer; margin-bottom: 16px;
+  }
+  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+  .q-meta { font-size: 10px; color: #334155; font-family: sans-serif; }
+  .tap-hint { font-size: 10px; color: #334155; font-family: sans-serif; }
+  .q-label { font-size: 10px; letter-spacing: 2px; color: #475569; font-family: sans-serif; text-transform: uppercase; margin-bottom: 10px; }
+  .question { font-size: 18px; line-height: 1.65; color: #E2E8F0; font-weight: 600; }
+  .scenario-tag {
+    display: inline-block; margin-top: 10px; font-size: 10px; letter-spacing: 1px;
+    font-family: sans-serif; padding: 3px 10px; border-radius: 8px; text-transform: uppercase;
+  }
+  .divider { height: 1px; margin: 22px 0; }
+  .a-label { font-size: 10px; letter-spacing: 2px; font-family: sans-serif; text-transform: uppercase; margin-bottom: 14px; font-weight: 700; }
+
+  /* ANSWER STRUCTURE */
+  .answer-wrap { font-size: 14.5px; line-height: 1.85; color: #CBD5E1; }
+  .answer-step { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .step-tag {
+    flex-shrink: 0; font-size: 9px; font-family: sans-serif; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px;
+    border-radius: 6px; margin-top: 3px;
+  }
+  .step-text { font-size: 14px; line-height: 1.8; color: #CBD5E1; }
+  .key-phrase {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .phrase-chip {
+    font-size: 11px; font-family: sans-serif; padding: 3px 10px;
+    border-radius: 8px; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08); color: #64748B;
+  }
+
+  /* CONTROLS */
+  .controls { display: flex; gap: 8px; margin-bottom: 12px; }
+  .btn {
+    flex: 1; padding: 11px 0; border-radius: 12px; font-size: 13px;
+    cursor: pointer; font-family: sans-serif; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.04); color: #94A3B8;
+  }
+  .btn:disabled { color: #1E293B; cursor: default; }
+  .btn-flip { flex: 2; font-weight: 700; color: #E2E8F0; font-size: 14px; }
+  .btn-speak.on { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.35); color: #F87171; }
+
+  /* RATING */
+  .rating { display: flex; gap: 8px; margin-bottom: 14px; align-items: center; }
+  .r-label { font-size: 11px; color: #475569; font-family: sans-serif; white-space: nowrap; }
+  .r-btn {
+    flex: 1; padding: 8px 0; border-radius: 10px; font-size: 11px;
+    cursor: pointer; font-family: sans-serif; transition: all 0.2s;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); color: #475569;
+  }
+
+  /* PROGRESS */
+  .prog-panel {
+    background: rgba(8,8,18,0.97); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 18px 22px; margin-bottom: 14px;
+  }
+  .prog-panel h3 { font-size: 10px; letter-spacing: 2px; color: #64748B; font-family: sans-serif; text-transform: uppercase; margin-bottom: 12px; }
+  .prog-grid { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+  .dot {
+    width: 28px; height: 28px; border-radius: 6px; font-size: 9px; font-family: sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); color: #1E293B; font-weight: 700;
+  }
+  .dot.good { background: rgba(16,185,129,0.18); border-color: rgba(16,185,129,0.4); color: #10B981; }
+  .dot.ok   { background: rgba(245,158,11,0.18);  border-color: rgba(245,158,11,0.4);  color: #F59E0B; }
+  .dot.bad  { background: rgba(239,68,68,0.18);   border-color: rgba(239,68,68,0.4);   color: #EF4444; }
+  .prog-stats { display: flex; gap: 14px; flex-wrap: wrap; }
+  .prog-stats span { font-size: 11px; font-family: sans-serif; }
+
+  .footer { color: #1E293B; font-size: 10px; font-family: sans-serif; text-align: center; margin-top: 10px; }
+
+  @media(max-width:480px){
+    .question{font-size:16px} .card{padding:22px 20px} .step-text{font-size:13px}
+  }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+<div class="wrap">
+
+  <div class="hd">
+    <div>
+      <div class="eyebrow">EOII Interview Prep · Part 2</div>
+      <h1>Situational Flash Cards</h1>
+    </div>
+    <button class="prog-btn" onclick="togglePanel()">📊 <span id="done-n">0</span>/25 ✓</button>
+  </div>
+
+  <div class="cats" id="cats"></div>
+
+  <div class="meta-row">
+    <span class="meta-left">Card <span id="cn">1</span> / <span id="ct">25</span></span>
+    <span class="cat-tag" id="cat-tag"></span>
+  </div>
+  <div class="bar-track"><div class="bar-fill" id="bar"></div></div>
+
+  <div class="card" id="card" onclick="flip()">
+    <div class="card-top">
+      <span class="q-meta" id="q-meta"></span>
+      <span class="tap-hint" id="tap-hint">tap to reveal answer ↓</span>
+    </div>
+    <div class="q-label">❓ Situation</div>
+    <div class="question" id="q-text"></div>
+    <div id="scenario-badge"></div>
+
+    <div class="divider" id="div" style="display:none"></div>
+    <div class="a-label" id="a-label" style="display:none">✅ Model Answer</div>
+    <div class="answer-wrap" id="answer-wrap" style="display:none"></div>
+  </div>
+
+  <div class="controls">
+    <button class="btn btn-speak" id="btn-speak" onclick="handleSpeak()">🔊 Listen</button>
+    <button class="btn" id="btn-prev" onclick="prev()">← Prev</button>
+    <button class="btn btn-flip" id="btn-flip" onclick="flip()">👁 Show Answer</button>
+    <button class="btn" id="btn-next" onclick="next()">Next →</button>
+  </div>
+
+  <div class="rating" id="rating" style="display:none">
+    <span class="r-label">Rate:</span>
+    <button class="r-btn" id="rb-bad"  onclick="mark('bad')">😰 Struggled</button>
+    <button class="r-btn" id="rb-ok"   onclick="mark('ok')">🤔 Almost</button>
+    <button class="r-btn" id="rb-good" onclick="mark('good')">😊 Nailed it</button>
+  </div>
+
+  <div class="prog-panel" id="prog-panel" style="display:none">
+    <h3>Progress</h3>
+    <div class="prog-grid" id="prog-grid"></div>
+    <div class="prog-stats" id="prog-stats"></div>
+  </div>
+
+  <div class="footer">tap card or button to reveal · questions shuffle randomly by category</div>
+</div>
+
+<script>
+const CATS = [
+  { id:"all", label:"📋 All",              color:"#64748B" },
+  { id:"A",   label:"👥 Staff Mgmt",       color:"#3B82F6" },
+  { id:"B",   label:"🚨 Crisis",           color:"#EF4444" },
+  { id:"C",   label:"📋 Project & Process",color:"#8B5CF6" },
+  { id:"D",   label:"🏛️ Ethics & Public",  color:"#F59E0B" },
+  { id:"E",   label:"🎪 Event Mgmt",       color:"#10B981" },
+  { id:"F",   label:"🔀 Mixed",            color:"#06B6D4" },
+];
+
+// Each question has: id, cat, scenario (keyword label), q (question text), steps (answer broken into tagged steps), phrases (key phrases to remember)
+const DATA = [
+  {
+    id:1, cat:"A",
+    scenario:"Underperforming Subordinate",
+    q:"One of your subordinates has been consistently underperforming. What would you do?",
+    steps:[
+      { tag:"Observe", color:"#3B82F6", text:"Document specific gaps in quality, speed, or attitude before acting — don't react on instinct." },
+      { tag:"Understand", color:"#8B5CF6", text:"Hold a private one-on-one. Make it a two-way conversation, not a reprimand. Ask if there are personal or work-related difficulties." },
+      { tag:"Support", color:"#10B981", text:"Co-create a performance improvement plan with the subordinate — clear, measurable targets and an agreed review timeline. Check if they need training or resources." },
+      { tag:"Monitor", color:"#F59E0B", text:"Follow up regularly, not to micromanage, but to show genuine support. Document all discussions." },
+      { tag:"Escalate if needed", color:"#EF4444", text:"If no improvement after reasonable support, escalate to HR via proper civil service procedures." },
+    ],
+    phrases:["performance improvement plan","private conversation","not a reprimand","document all discussions","proper HR procedures"]
+  },
+  {
+    id:2, cat:"A",
+    scenario:"Half Team Absent — Deadline Day",
+    q:"Half of your team have called in sick on a critical deadline day. What would you do?",
+    steps:[
+      { tag:"Triage", color:"#EF4444", text:"Immediately assess what must be delivered today versus what can be deferred. Prioritise by urgency and impact." },
+      { tag:"Mobilise", color:"#3B82F6", text:"Speak to available staff honestly — ask if anyone can flex responsibilities. Explore whether other teams can assist temporarily." },
+      { tag:"Escalate", color:"#F59E0B", text:"Inform your supervisor promptly so they are not caught off guard and can support or make higher-level decisions." },
+      { tag:"Communicate", color:"#10B981", text:"For work that cannot be completed, communicate proactively to affected parties with a revised timeline." },
+      { tag:"Review", color:"#8B5CF6", text:"After resolution, review contingency planning to reduce vulnerability to similar situations." },
+    ],
+    phrases:["triage tasks by urgency","flex responsibilities","inform supervisor promptly","proactive communication","contingency planning"]
+  },
+  {
+    id:3, cat:"A",
+    scenario:"Team Conflict Affecting Morale",
+    q:"Two subordinates are in constant conflict with each other and it is affecting team morale. What would you do?",
+    steps:[
+      { tag:"Don't ignore", color:"#EF4444", text:"Unresolved conflict escalates. Act early." },
+      { tag:"Listen", color:"#3B82F6", text:"Speak to each person individually, without judgment. Let both feel heard." },
+      { tag:"Diagnose", color:"#8B5CF6", text:"Determine if the conflict is personal or work-related — the resolution approach differs significantly." },
+      { tag:"Facilitate", color:"#10B981", text:"If work-related, clarify roles and workflows. If interpersonal, facilitate a structured conversation, set expectations for professional conduct." },
+      { tag:"Protect the team", color:"#F59E0B", text:"Acknowledge the wider team's discomfort and reassure them the situation is being handled. Escalate to HR if no improvement." },
+    ],
+    phrases:["speak individually","personal vs work-related","professional conduct","structured conversation","protect wider team morale"]
+  },
+  {
+    id:4, cat:"A",
+    scenario:"High Performer Considering Resignation",
+    q:"A subordinate who has been performing well recently tells you they are seriously considering resigning. What would you do?",
+    steps:[
+      { tag:"Act quickly", color:"#EF4444", text:"Treat this as urgent. Request a private conversation promptly — without pressuring them." },
+      { tag:"Listen", color:"#3B82F6", text:"Genuinely understand their reasons — career development, workload, team environment, personal circumstances." },
+      { tag:"Explore options", color:"#10B981", text:"Based on their concerns, explore training, secondment opportunities, expanded responsibilities, or workload adjustments." },
+      { tag:"Escalate", color:"#8B5CF6", text:"If the matter is outside your authority (e.g., grading, posting), escalate to your supervisor." },
+      { tag:"Plan & Reflect", color:"#F59E0B", text:"Even if they leave, ensure a proper handover. Reflect on whether systemic team issues need addressing to retain others." },
+    ],
+    phrases:["no pressure","genuinely listen","career development","secondment opportunities","proper handover plan"]
+  },
+  {
+    id:5, cat:"A",
+    scenario:"Subordinate's Significant Error",
+    q:"You discover that a subordinate has made a significant error in an official document that has already been submitted. What would you do?",
+    steps:[
+      { tag:"Assess", color:"#3B82F6", text:"Determine the extent of the error — who received it, what downstream action it may have triggered." },
+      { tag:"Transparency", color:"#EF4444", text:"Do not cover it up. Inform your supervisor promptly and transparently." },
+      { tag:"Correct", color:"#10B981", text:"Issue a correction as quickly as possible through the department's established procedures for amendments." },
+      { tag:"Understand", color:"#8B5CF6", text:"Speak to the subordinate privately to understand the root cause — knowledge gap, process failure, time pressure?" },
+      { tag:"Prevent", color:"#F59E0B", text:"Introduce appropriate safeguards — training, workflow checks, or a peer-review step — to prevent recurrence." },
+    ],
+    phrases:["do not cover it up","inform supervisor promptly","root cause analysis","peer-review step","prevent recurrence"]
+  },
+  {
+    id:6, cat:"A",
+    scenario:"Over-capacity — New Tasks from Supervisor",
+    q:"Your supervisor asks you to take on additional tasks, but your team is already at capacity. What would you do?",
+    steps:[
+      { tag:"Don't refuse flatly", color:"#EF4444", text:"Respond professionally. Present factual context about current workload using specific examples — not as a complaint." },
+      { tag:"Offer options", color:"#3B82F6", text:"Suggest: defer existing tasks, share new work with another team, or arrange temporary support." },
+      { tag:"Respect the decision", color:"#10B981", text:"If your supervisor still requires you to take on the work, accept respectfully and reprioritise with their guidance." },
+      { tag:"Protect the team", color:"#F59E0B", text:"Keep your team informed and monitor their wellbeing to prevent burnout or errors from additional pressure." },
+    ],
+    phrases:["factual context","not a complaint","suggest options","accept respectfully","monitor team wellbeing"]
+  },
+  {
+    id:7, cat:"B",
+    scenario:"System Crash — Public Cannot Be Served",
+    q:"The computer system in your office has crashed and members of the public who have appointments cannot be served. What would you do?",
+    steps:[
+      { tag:"Inform the public", color:"#3B82F6", text:"Calmly inform all waiting members of the public — verbally and with a written notice — about the failure and expected resolution time. Stop creating new appointments." },
+      { tag:"Escalate", color:"#EF4444", text:"Notify IT and your supervisor immediately with a clear description of the problem." },
+      { tag:"Workaround", color:"#10B981", text:"Assess whether any services can be provided manually as a temporary workaround, e.g. paper-based submissions with follow-up." },
+      { tag:"Reschedule", color:"#8B5CF6", text:"For those who cannot wait, offer rescheduling at the earliest opportunity. Collect contact details." },
+      { tag:"Prevent", color:"#F59E0B", text:"After resolution, write an incident report and work with IT to identify cause and implement preventive measures." },
+    ],
+    phrases:["calm communication","written notice","manual workaround","reschedule promptly","incident report"]
+  },
+  {
+    id:8, cat:"B",
+    scenario:"Formal Complaint — Rude Staff",
+    q:"A member of the public makes a formal complaint that one of your staff was rude to them. What would you do?",
+    steps:[
+      { tag:"Acknowledge", color:"#3B82F6", text:"Acknowledge the complainant promptly. Thank them for raising the matter and assure them it will be investigated seriously." },
+      { tag:"Investigate", color:"#8B5CF6", text:"Speak to the staff member privately to hear their account. Review records, CCTV if available, or written correspondence." },
+      { tag:"Act", color:"#EF4444", text:"If substantiated, address through HR channels — formal discussion, written warning, or remedial training depending on severity." },
+      { tag:"Close the loop", color:"#10B981", text:"Follow up with the complainant. Apologise on behalf of the department if warranted. Explain what steps were taken." },
+      { tag:"Reflect", color:"#F59E0B", text:"Consider whether this is isolated or signals a wider service culture issue requiring team-level attention." },
+    ],
+    phrases:["take complaint seriously","hear both sides","HR channels","close the loop","service culture"]
+  },
+  {
+    id:9, cat:"B",
+    scenario:"Unexpected Protest at Public Event",
+    q:"During a major public event your team is organising, an unexpected protest breaks out at the venue. What would you do?",
+    steps:[
+      { tag:"Safety first", color:"#EF4444", text:"Prioritise safety of all attendees and staff. Contact security and police if necessary — for professional crowd management, not as overreaction." },
+      { tag:"Assess", color:"#3B82F6", text:"Determine whether to pause or evacuate in consultation with your supervisor and the event safety officer." },
+      { tag:"Communicate", color:"#10B981", text:"Keep attendees informed calmly and clearly. Do not engage or confront protesters directly." },
+      { tag:"Document", color:"#8B5CF6", text:"Brief your supervisor and document all actions taken with a timeline." },
+      { tag:"Review", color:"#F59E0B", text:"Conduct a debrief afterwards. Update the risk assessment and contingency planning for future events." },
+    ],
+    phrases:["safety first","do not confront protesters","consult supervisor","document with timeline","update risk assessment"]
+  },
+  {
+    id:10, cat:"B",
+    scenario:"Vendor Withdraws — Two Weeks to Deadline",
+    q:"You are managing a project and a key external vendor suddenly withdraws two weeks before the deadline. What would you do?",
+    steps:[
+      { tag:"Clarify", color:"#3B82F6", text:"Confirm withdrawal in writing. Understand the reason. Assess whether partial deliverables can still be received." },
+      { tag:"Escalate", color:"#EF4444", text:"Brief your supervisor immediately — this is a material risk that goes beyond your authority to resolve alone." },
+      { tag:"Legal review", color:"#8B5CF6", text:"Review the contract for remedy clauses — penalties or cost recovery." },
+      { tag:"Source alternatives", color:"#10B981", text:"Urgently reach out to alternative vendors with a clear brief and request for emergency quotes." },
+      { tag:"Communicate & document", color:"#F59E0B", text:"Update all stakeholders honestly with a revised plan. Keep detailed records of all decisions and communications." },
+    ],
+    phrases:["confirm in writing","brief supervisor immediately","contract remedies","alternative vendors","honest stakeholder update"]
+  },
+  {
+    id:11, cat:"B",
+    scenario:"Journalist Requesting Comment",
+    q:"A journalist contacts your department requesting urgent comment on a sensitive matter your team has been handling. What would you do?",
+    steps:[
+      { tag:"Do not speak", color:"#EF4444", text:"Do not speak to the journalist or provide any information without authorisation." },
+      { tag:"Escalate immediately", color:"#3B82F6", text:"Notify your supervisor and the department's communications officer / press liaison immediately with full background." },
+      { tag:"Control the message", color:"#8B5CF6", text:"Ensure no other team members make unauthorised comments. Acknowledge the inquiry is being directed to the appropriate spokesperson." },
+      { tag:"Review", color:"#F59E0B", text:"Afterwards, review internal communications protocols to prevent sensitive information from being accessible to unauthorised parties." },
+    ],
+    phrases:["no authorisation","press liaison","consistent messaging","through proper channels","review information controls"]
+  },
+  {
+    id:12, cat:"C",
+    scenario:"Leading an Unfamiliar Project",
+    q:"Your supervisor asks you to lead a new project you have no experience in. How would you approach it?",
+    steps:[
+      { tag:"Clarify scope", color:"#3B82F6", text:"Fully understand objectives, scope, timeline, and expected outcomes. Ask clarifying questions until you have a clear picture." },
+      { tag:"Gap analysis", color:"#8B5CF6", text:"Identify what knowledge or skills the project requires that you lack. Fill gaps through reading, consultation with experienced colleagues, or training." },
+      { tag:"Build the team", color:"#10B981", text:"Assemble the right team to collectively cover all required competencies." },
+      { tag:"Plan", color:"#F59E0B", text:"Create a project plan with milestones and a risk register. Hold regular check-ins to track progress." },
+      { tag:"Communicate up", color:"#EF4444", text:"Keep your supervisor proactively informed. Flag issues early — never wait until they become crises." },
+    ],
+    phrases:["gap analysis","right team","milestones & risk register","proactive updates","flag issues early"]
+  },
+  {
+    id:13, cat:"C",
+    scenario:"Two Supervisors — Conflicting Deadlines",
+    q:"You are given two equally urgent tasks by two different supervisors and cannot complete both on time. What would you do?",
+    steps:[
+      { tag:"Be transparent", color:"#3B82F6", text:"Go back to both supervisors. Clearly explain the conflict — the two deadlines, the capacity constraint, and that you need their guidance." },
+      { tag:"Present the facts", color:"#8B5CF6", text:"Provide a factual breakdown of what each task involves, time needed, and implications of delay to either." },
+      { tag:"Let them decide", color:"#EF4444", text:"The prioritisation decision belongs to them, not you. If they cannot agree, escalate to a more senior officer." },
+      { tag:"Execute & document", color:"#10B981", text:"Once priority is clear, focus on the higher-priority task. Set clear expectations on the other timeline. Document the decision." },
+    ],
+    phrases:["transparent about the conflict","factual breakdown","their decision to make","escalate if needed","document the outcome"]
+  },
+  {
+    id:14, cat:"C",
+    scenario:"Identifying an Inefficient Process",
+    q:"You identify a process in your team that is inefficient and wasting significant time. What would you do?",
+    steps:[
+      { tag:"Analyse first", color:"#3B82F6", text:"Map out each step, estimate time involved, and identify where the bottleneck or redundancy is. Confirm your assessment before acting." },
+      { tag:"Consult the team", color:"#8B5CF6", text:"Ask team members who work the process daily — they often have valuable insights and may already have solutions." },
+      { tag:"Propose", color:"#10B981", text:"Develop a clear proposal: the change, expected benefits, risks, and implementation plan. Present to your supervisor for approval." },
+      { tag:"Implement carefully", color:"#F59E0B", text:"If approved, pilot the change first. Monitor results and document the new process clearly so everyone follows it." },
+    ],
+    phrases:["analyse before acting","consult daily users","formal proposal","supervisor approval","pilot first"]
+  },
+  {
+    id:15, cat:"C",
+    scenario:"Project Falling Behind Schedule",
+    q:"You are leading a project that is falling significantly behind schedule due to circumstances beyond your control. What would you do?",
+    steps:[
+      { tag:"Assess honestly", color:"#3B82F6", text:"Realistically assess the delay — how far behind, the root cause, and whether any schedule recovery is possible." },
+      { tag:"Inform supervisor", color:"#EF4444", text:"Brief your supervisor promptly. Never hide delays. Present not just the problem but a proposed recovery plan." },
+      { tag:"Revise timeline", color:"#8B5CF6", text:"If the original deadline cannot be met, recommend a revised timeline based on honest assessment — not optimism." },
+      { tag:"Communicate externally", color:"#10B981", text:"Inform all stakeholders professionally — the cause, revised timeline, and steps being taken to prevent further slippage." },
+      { tag:"Refocus the team", color:"#F59E0B", text:"Hold a team session to refocus and maintain morale. Conduct a post-incident review to improve future project planning." },
+    ],
+    phrases:["honest assessment","never hide delays","recovery plan","revised timeline","post-incident review"]
+  },
+  {
+    id:16, cat:"C",
+    scenario:"Budget Cut — 15% Reduction",
+    q:"Your team has been asked to cut its budget by 15% while maintaining the same service level. How would you approach this?",
+    steps:[
+      { tag:"Map expenditure", color:"#3B82F6", text:"Classify all current costs — mandatory, important, discretionary." },
+      { tag:"Consult the team", color:"#8B5CF6", text:"Ask team members for ideas on waste or duplication — they often know best." },
+      { tag:"Develop scenarios", color:"#10B981", text:"Create 2-3 reduction scenarios, each meeting the 15% target differently. Evaluate each one's impact on service delivery." },
+      { tag:"Recommend", color:"#F59E0B", text:"Present scenarios to your supervisor with a clear recommendation. Avoid crude across-the-board percentage cuts." },
+      { tag:"Find efficiencies", color:"#EF4444", text:"Look for efficiency gains that reduce cost without reducing output — e.g. digitalising processes or consolidating purchases." },
+    ],
+    phrases:["mandatory vs discretionary","consult the team","2-3 scenarios","avoid across-the-board cuts","efficiency gains"]
+  },
+  {
+    id:17, cat:"D",
+    scenario:"Aggressive Member of the Public",
+    q:"A member of the public is being extremely aggressive and abusive toward you or your staff. What would you do?",
+    steps:[
+      { tag:"De-escalate", color:"#3B82F6", text:"Stay calm. Speak in a measured tone. Acknowledge they are frustrated. Do not match their aggression." },
+      { tag:"Set limits", color:"#F59E0B", text:"If abuse continues, firmly but professionally inform them you cannot continue unless they speak respectfully." },
+      { tag:"End if necessary", color:"#EF4444", text:"If the situation does not improve, politely end the meeting. Contact security or police if they refuse to leave or become threatening." },
+      { tag:"Document & support", color:"#8B5CF6", text:"Document the incident in detail. Report to your supervisor. Check on the wellbeing of affected staff." },
+      { tag:"Review", color:"#10B981", text:"Review counter service environment safety features and whether staff have training on managing difficult interactions." },
+    ],
+    phrases:["remain calm","do not match aggression","set clear limits","check staff wellbeing","document and report"]
+  },
+  {
+    id:18, cat:"D",
+    scenario:"Colleague Falsifying Attendance Records",
+    q:"You discover that a colleague at the same level as you has been falsifying attendance records. What would you do?",
+    steps:[
+      { tag:"Verify", color:"#3B82F6", text:"Ensure you have sufficient and reliable evidence — not rumour or secondhand information — before taking action." },
+      { tag:"Report through channels", color:"#EF4444", text:"Report to your supervisor or, if they are close to the colleague, to a higher-level officer or HR, following department reporting procedures." },
+      { tag:"Do not confront directly", color:"#8B5CF6", text:"Do not confront the colleague directly — this could compromise any subsequent investigation." },
+      { tag:"Cooperate", color:"#10B981", text:"Handle with discretion. Do not discuss with other colleagues. Cooperate fully with any investigation." },
+    ],
+    phrases:["reliable evidence first","report through proper channels","do not confront directly","civil service probity","full cooperation with investigation"]
+  },
+  {
+    id:19, cat:"D",
+    scenario:"Friend Asking for Procurement Information",
+    q:"A friend who works in the private sector asks you for information about an upcoming government procurement exercise. What would you do?",
+    steps:[
+      { tag:"Decline clearly", color:"#EF4444", text:"Decline clearly but politely. Providing advance or privileged information breaches civil service ethics and potentially the Prevention of Bribery Ordinance." },
+      { tag:"Explain", color:"#3B82F6", text:"Explain that all procurement information is made publicly available through official channels (Government's procurement website)." },
+      { tag:"Record & consider reporting", color:"#F59E0B", text:"Make a note of the request. Depending on its nature or persistence, consider informing your supervisor as a precaution." },
+      { tag:"Be direct", color:"#8B5CF6", text:"Be direct with your friend: your friendship must not put either of you in a compromising position." },
+    ],
+    phrases:["Prevention of Bribery Ordinance","public procurement channels","note the request","friendship must not compromise integrity"]
+  },
+  {
+    id:20, cat:"D",
+    scenario:"Asked to Implement a Policy You Disagree With",
+    q:"You are asked to implement a new policy that you personally disagree with. What would you do?",
+    steps:[
+      { tag:"Implement it", color:"#EF4444", text:"As a civil servant, your role is to implement government policy professionally — regardless of personal views." },
+      { tag:"Raise concerns properly", color:"#3B82F6", text:"If you have substantive, evidence-based concerns, raise them through internal channels before implementation — e.g. in writing to your supervisor." },
+      { tag:"Implement wholeheartedly", color:"#10B981", text:"Once the direction is confirmed, implement wholeheartedly. Do not let personal views affect the quality of your work or advice to the public." },
+      { tag:"Ethical limit", color:"#F59E0B", text:"The exception: you would not implement a policy that requires you to act unlawfully or unethically." },
+    ],
+    phrases:["serve the administration","raise through internal channels","implement wholeheartedly","ethical limits apply","do not let views affect work quality"]
+  },
+  {
+    id:21, cat:"E",
+    scenario:"Medical Emergency at Event",
+    q:"During a large public event you are managing, a participant has a medical emergency. What would you do?",
+    steps:[
+      { tag:"Emergency response", color:"#EF4444", text:"Ensure someone calls 999 immediately. Deploy on-site first aid personnel. Clear the area for emergency responders." },
+      { tag:"Notify", color:"#3B82F6", text:"Contact venue management and your supervisor simultaneously." },
+      { tag:"Manage the crowd", color:"#10B981", text:"Manage other participants calmly. Avoid panic while being transparent that a medical situation is being attended to. Pause the event if appropriate." },
+      { tag:"Brief responders", color:"#8B5CF6", text:"When emergency services arrive, brief them and ensure they have everything they need." },
+      { tag:"Document & review", color:"#F59E0B", text:"Document the incident with full timeline and actions. Review first aid provision and emergency protocols afterward." },
+    ],
+    phrases:["999 immediately","first aid personnel","avoid panic","brief emergency services","post-event protocol review"]
+  },
+  {
+    id:22, cat:"E",
+    scenario:"Keynote Speaker Cancels Morning of Event",
+    q:"The keynote speaker for an important government event cancels on the morning of the event. What would you do?",
+    steps:[
+      { tag:"Confirm & explore", color:"#3B82F6", text:"Confirm cancellation in writing. Assess whether remote participation (video link) is possible." },
+      { tag:"Find alternative", color:"#EF4444", text:"Consult your supervisor immediately. Identify alternative speakers — senior official, departmental representative, or expert at short notice." },
+      { tag:"Restructure agenda", color:"#8B5CF6", text:"Review whether the schedule can be rearranged — move breakout sessions or panels earlier to fill the slot." },
+      { tag:"Communicate to attendees", color:"#10B981", text:"Inform attendees promptly and professionally before they arrive. Apologise for the change and explain the programme adjustment." },
+      { tag:"Process review", color:"#F59E0B", text:"Afterward, review speaker confirmation protocols and consider building a backup arrangement into future events." },
+    ],
+    phrases:["explore video link","consult supervisor immediately","restructure agenda","inform attendees before arrival","backup arrangements"]
+  },
+  {
+    id:23, cat:"E",
+    scenario:"Not Enough Volunteers on Event Day",
+    q:"You are coordinating an event and realise on the day that you do not have enough volunteers or staff to cover all the stations. What would you do?",
+    steps:[
+      { tag:"Assess the gap", color:"#3B82F6", text:"Identify how many positions are uncovered. Separate critical stations from lower-priority ones." },
+      { tag:"Reposition", color:"#10B981", text:"Reposition existing volunteers or staff to cover critical gaps. Contact your supervisor to explore whether any last-minute support is available." },
+      { tag:"Consolidate", color:"#8B5CF6", text:"Consider consolidating or temporarily closing non-essential stations." },
+      { tag:"Communicate", color:"#F59E0B", text:"Inform attendees calmly if any service point is temporarily unavailable." },
+      { tag:"Debrief", color:"#EF4444", text:"After the event, review staffing planning and build a larger buffer of confirmed volunteers into future events." },
+    ],
+    phrases:["critical vs non-critical","reposition staff","consolidate stations","calm attendee communication","larger volunteer buffer"]
+  },
+  {
+    id:24, cat:"F",
+    scenario:"Credit Given to the Wrong Colleague",
+    q:"Your supervisor praises a piece of work done by your team, but attributes the credit entirely to another colleague, overlooking your contribution. What would you do?",
+    steps:[
+      { tag:"Don't correct publicly", color:"#EF4444", text:"Do not correct your supervisor in front of others — it could embarrass them and damage working relationships." },
+      { tag:"Private clarification", color:"#3B82F6", text:"At an appropriate time in a private setting, politely give your supervisor a fuller picture of who contributed — framed as providing complete information, not seeking credit." },
+      { tag:"Build systems", color:"#10B981", text:"Going forward, ensure contributions are clearly documented — through task assignments and project records — so visibility is built into the process." },
+      { tag:"Team culture", color:"#8B5CF6", text:"Foster a team culture where credit is shared and records protect everyone fairly." },
+    ],
+    phrases:["never correct publicly","private setting","frame as providing information","document contributions","shared credit culture"]
+  },
+  {
+    id:25, cat:"F",
+    scenario:"Posted to a Completely New Department",
+    q:"You have just been posted to a completely new department you know nothing about. How would you approach your first month?",
+    steps:[
+      { tag:"Listen first", color:"#3B82F6", text:"Read background material on the department's mandate, ongoing projects, key stakeholders, and current challenges." },
+      { tag:"Build relationships", color:"#10B981", text:"Introduce yourself to colleagues across different levels — not just your immediate team. Build early relationships." },
+      { tag:"Align with supervisor", color:"#8B5CF6", text:"Meet your supervisor early to understand their priorities, expectations of you, and their preferred communication style." },
+      { tag:"Deliver reliably first", color:"#F59E0B", text:"Resist the urge to make immediate changes. Focus on delivering immediate responsibilities reliably while building context." },
+      { tag:"Observe & flag", color:"#EF4444", text:"Note early observations or concerns. Raise them through proper channels rather than acting unilaterally." },
+    ],
+    phrases:["listen before acting","build relationships early","align with supervisor","deliver reliably first","observations through proper channels"]
+  },
+];
+
+const CAT_MAP = Object.fromEntries(CATS.map(c=>[c.id,c]));
+let queue=[], idx=0, flipped=false, speaking=false, filter="all", progress={};
+
+function shuffle(a){return [...a].sort(()=>Math.random()-0.5);}
+function buildQ(f){
+  const pool = f==="all" ? DATA : DATA.filter(d=>d.cat===f);
+  return shuffle(pool);
+}
+
+function init(){
+  const el = document.getElementById("cats");
+  CATS.forEach(c=>{
+    const b=document.createElement("button");
+    b.className="cat-btn"+(c.id==="all"?" active":"");
+    b.textContent=c.label; b.dataset.id=c.id;
+    b.onclick=()=>setFilter(c.id);
+    el.appendChild(b);
+  });
+  queue=buildQ("all"); render();
+}
+
+function render(){
+  const cur=queue[idx]; if(!cur) return;
+  const cat=CAT_MAP[cur.cat];
+  const sc=cat.color;
+
+  document.getElementById("cn").textContent=idx+1;
+  document.getElementById("ct").textContent=queue.length;
+  document.getElementById("q-meta").textContent=`Q${cur.id} / ${DATA.length}`;
+
+  const tag=document.getElementById("cat-tag");
+  tag.textContent=cat.label;
+  tag.style.color=sc; tag.style.background=sc+"20"; tag.style.border=`1px solid ${sc}40`;
+
+  const bar=document.getElementById("bar");
+  bar.style.width=((idx+1)/queue.length*100)+"%";
+  bar.style.background=`linear-gradient(90deg, ${sc}, ${sc}88)`;
+
+  const card=document.getElementById("card");
+  card.style.borderColor=flipped?sc+"55":"rgba(255,255,255,0.07)";
+  card.style.boxShadow=flipped
+    ?`0 0 40px ${sc}18, 0 20px 55px rgba(0,0,0,0.55)`
+    :"0 20px 55px rgba(0,0,0,0.55)";
+
+  document.getElementById("q-text").textContent=cur.q;
+
+  // scenario badge
+  const sb=document.getElementById("scenario-badge");
+  sb.innerHTML=`<span class="scenario-tag" style="background:${sc}18;color:${sc};border:1px solid ${sc}40">⚡ ${cur.scenario}</span>`;
+
+  document.getElementById("tap-hint").textContent=flipped?"":"tap to reveal answer ↓";
+
+  // answer
+  const show=flipped;
+  document.getElementById("div").style.display=show?"block":"none";
+  if(show) document.getElementById("div").style.background=`linear-gradient(90deg,transparent,${sc}55,transparent)`;
+  document.getElementById("a-label").style.display=show?"block":"none";
+  if(show) document.getElementById("a-label").style.color=sc;
+  document.getElementById("answer-wrap").style.display=show?"block":"none";
+
+  if(show){
+    let html="";
+    cur.steps.forEach(s=>{
+      html+=`<div class="answer-step">
+        <span class="step-tag" style="background:${s.color}18;color:${s.color};border:1px solid ${s.color}35">${s.tag}</span>
+        <span class="step-text">${s.text}</span>
+      </div>`;
+    });
+    // key phrases
+    html+=`<div class="key-phrase">`;
+    cur.phrases.forEach(p=>{
+      html+=`<span class="phrase-chip">💡 ${p}</span>`;
+    });
+    html+=`</div>`;
+    document.getElementById("answer-wrap").innerHTML=html;
+  }
+
+  document.getElementById("btn-flip").textContent=show?"🙈 Hide Answer":"👁 Show Answer";
+  document.getElementById("btn-flip").style.background=show?`${sc}22`:`${sc}14`;
+  document.getElementById("btn-flip").style.borderColor=show?`${sc}66`:`${sc}33`;
+
+  document.getElementById("btn-prev").disabled=idx===0;
+  document.getElementById("btn-next").textContent=idx===queue.length-1?"🔀 Reshuffle":"Next →";
+  document.getElementById("rating").style.display=show?"flex":"none";
+
+  const s=progress[cur.id];
+  [["bad","😰 Struggled","#EF4444"],["ok","🤔 Almost","#F59E0B"],["good","😊 Nailed it","#10B981"]].forEach(([st,lb,cl])=>{
+    const b=document.getElementById("rb-"+st);
+    b.textContent=lb;
+    b.style.cssText=s===st?`background:${cl}22;border-color:${cl}55;color:${cl};font-weight:700`
+      :"background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.07);color:#475569;font-weight:400";
+  });
+
+  renderDots();
+}
+
+function flip(){flipped=!flipped;render();}
+function next(){
+  cancelSpeak();
+  if(idx<queue.length-1){idx++;}
+  else{queue=buildQ(filter);idx=0;}
+  flipped=false;render();
+}
+function prev(){if(idx===0)return;cancelSpeak();idx--;flipped=false;render();}
+
+function setFilter(f){
+  filter=f;
+  document.querySelectorAll(".cat-btn").forEach(b=>{
+    const a=b.dataset.id===f;
+    b.classList.toggle("active",a);
+    const sc=CAT_MAP[b.dataset.id]?.color||"#64748B";
+    b.style.cssText=a?`background:${sc};color:#fff;border-color:${sc}`
+      :"background:rgba(255,255,255,0.04);color:#64748B;border-color:rgba(255,255,255,0.08)";
+  });
+  queue=buildQ(f);idx=0;flipped=false;cancelSpeak();render();
+}
+
+function mark(st){
+  const cur=queue[idx];if(!cur)return;
+  progress[cur.id]=st;
+  document.getElementById("done-n").textContent=Object.values(progress).filter(v=>v==="good").length;
+  render();
+}
+
+function handleSpeak(){
+  const cur=queue[idx];
+  if(!cur||!window.speechSynthesis)return;
+  if(speaking){cancelSpeak();return;}
+  const text=flipped?cur.steps.map(s=>s.tag+": "+s.text).join(". "):cur.q;
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.lang="en-HK";utt.rate=0.88;
+  const v=window.speechSynthesis.getVoices().find(v=>v.lang.startsWith("en"));
+  if(v)utt.voice=v;
+  utt.onend=()=>{speaking=false;updateSpeakBtn();};
+  window.speechSynthesis.speak(utt);
+  speaking=true;updateSpeakBtn();
+}
+function cancelSpeak(){window.speechSynthesis?.cancel();speaking=false;updateSpeakBtn();}
+function updateSpeakBtn(){
+  const b=document.getElementById("btn-speak");
+  b.textContent=speaking?"⏹ Stop":"🔊 Listen";
+  b.classList.toggle("on",speaking);
+}
+
+function togglePanel(){
+  const p=document.getElementById("prog-panel");
+  p.style.display=p.style.display==="none"?"block":"none";
+  renderDots();
+}
+
+function renderDots(){
+  const grid=document.getElementById("prog-grid");
+  grid.innerHTML="";
+  DATA.forEach(d=>{
+    const s=progress[d.id];
+    const dot=document.createElement("div");
+    dot.className="dot"+(s?" "+s:"");
+    dot.title=d.scenario;
+    dot.textContent=s==="good"?"✓":s==="ok"?"~":s==="bad"?"✗":d.id;
+    grid.appendChild(dot);
+  });
+  const good=Object.values(progress).filter(v=>v==="good").length;
+  const ok=Object.values(progress).filter(v=>v==="ok").length;
+  const bad=Object.values(progress).filter(v=>v==="bad").length;
+  document.getElementById("prog-stats").innerHTML=
+    `<span style="color:#10B981">😊 Nailed it: ${good}</span>
+     <span style="color:#F59E0B">🤔 Almost: ${ok}</span>
+     <span style="color:#EF4444">😰 Struggled: ${bad}</span>
+     <span style="color:#475569">Unseen: ${DATA.length-good-ok-bad}</span>`;
+  document.getElementById("done-n").textContent=good;
+}
+
+window.speechSynthesis?.addEventListener("voiceschanged",()=>{});
+init();
+</script>
+</body>
+</html>
