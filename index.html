@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EOII Part 2 — Situational Questions Flash Cards</title>
+<title>EOII Part 2 — Situational Questions Flash Cards (50Q)</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -140,15 +140,15 @@
   <div class="hd">
     <div>
       <div class="eyebrow">EOII Interview Prep · Part 2</div>
-      <h1>Situational Flash Cards</h1>
+      <h1>Situational Flash Cards <span style="font-size:14px;color:#475569;font-weight:400">50 Questions</span></h1>
     </div>
-    <button class="prog-btn" onclick="togglePanel()">📊 <span id="done-n">0</span>/25 ✓</button>
+    <button class="prog-btn" onclick="togglePanel()">📊 <span id="done-n">0</span>/50 ✓</button>
   </div>
 
   <div class="cats" id="cats"></div>
 
   <div class="meta-row">
-    <span class="meta-left">Card <span id="cn">1</span> / <span id="ct">25</span></span>
+    <span class="meta-left">Card <span id="cn">1</span> / <span id="ct">50</span></span>
     <span class="cat-tag" id="cat-tag"></span>
   </div>
   <div class="bar-track"><div class="bar-fill" id="bar"></div></div>
@@ -187,7 +187,7 @@
     <div class="prog-stats" id="prog-stats"></div>
   </div>
 
-  <div class="footer">tap card or button to reveal · questions shuffle randomly by category</div>
+  <div class="footer">tap card or button to reveal · 50 questions · shuffle randomly by category</div>
 </div>
 
 <script>
@@ -519,6 +519,343 @@ const DATA = [
       { tag:"Observe & flag", color:"#EF4444", text:"Note early observations or concerns. Raise them through proper channels rather than acting unilaterally." },
     ],
     phrases:["listen before acting","build relationships early","align with supervisor","deliver reliably first","observations through proper channels"]
+  },
+
+  // ── CATEGORY A: STAFF MANAGEMENT (Q26–30) ──
+  {
+    id:26, cat:"A",
+    scenario:"New Hire Struggling to Integrate",
+    q:"A recently joined team member seems isolated, rarely speaks up in meetings, and does not appear to have formed any working relationships after two months. What would you do?",
+    steps:[
+      { tag:"Observe", color:"#3B82F6", text:"Distinguish between introversion (personality) and genuine isolation or difficulty integrating. Check if their output is affected." },
+      { tag:"1-on-1 check-in", color:"#8B5CF6", text:"Hold a warm, informal one-on-one. Focus on how they're settling in — not performance. Create a psychologically safe space. Ask open questions." },
+      { tag:"Address root cause", color:"#10B981", text:"If it's integration difficulty: pair them with a more experienced buddy or mentor. If it's skill confidence: provide early wins through manageable tasks." },
+      { tag:"Team inclusion", color:"#F59E0B", text:"Create structured team opportunities — brief team catch-ups, collaborative tasks — where new members can contribute without pressure." },
+      { tag:"Monitor", color:"#EF4444", text:"Follow up over the next month. If the situation does not improve and performance is impacted, involve HR for targeted support." },
+    ],
+    phrases:["psychological safety","buddy or mentor","structured inclusion","not a performance issue yet","follow up consistently"]
+  },
+  {
+    id:27, cat:"A",
+    scenario:"Star Subordinate Bypassing You",
+    q:"Your most capable subordinate has developed a habit of going directly to your supervisor, bypassing you, to discuss their work and ideas. What would you do?",
+    steps:[
+      { tag:"Reflect first", color:"#3B82F6", text:"Consider whether their behaviour stems from a lack of confidence in your support, a desire for visibility, or a personality trait. Avoid reacting defensively." },
+      { tag:"Private conversation", color:"#8B5CF6", text:"Have a direct but non-confrontational conversation. Acknowledge their ambition, but clarify the expected communication channels and why they matter for team coherence." },
+      { tag:"Create opportunity", color:"#10B981", text:"Actively give them visibility — present their ideas in team meetings, acknowledge their contributions publicly, and involve them in presentations to senior management." },
+      { tag:"Align with supervisor", color:"#F59E0B", text:"Inform your supervisor of the dynamic to prevent misunderstanding, without being seen as suppressing the subordinate's career." },
+      { tag:"Review your style", color:"#EF4444", text:"Reflect honestly: are you accessible enough? Do you give them adequate feedback? The bypass behaviour may be a symptom of a management gap." },
+    ],
+    phrases:["communication channels","give them visibility","not suppressing ambition","reflect on your own style","inform supervisor proactively"]
+  },
+  {
+    id:28, cat:"A",
+    scenario:"Long-serving Staff Resistant to Change",
+    q:"A senior long-serving team member is openly resistant to a new digital system being rolled out across your team and is influencing others negatively. What would you do?",
+    steps:[
+      { tag:"Understand first", color:"#3B82F6", text:"Meet privately to understand their concerns — is it fear of redundancy, confidence with technology, or genuine disagreement with the system's suitability?" },
+      { tag:"Acknowledge their value", color:"#8B5CF6", text:"Explicitly recognise their experience and institutional knowledge. Frame the new system as a tool that frees them from repetitive tasks, not a replacement for their expertise." },
+      { tag:"Involve them", color:"#10B981", text:"Involve them meaningfully in the rollout — as a tester, feedback provider, or even a peer trainer. Ownership reduces resistance." },
+      { tag:"Address the wider team", color:"#F59E0B", text:"Provide clear, structured training to all. Set the expectation that adoption is expected of everyone, including senior members." },
+      { tag:"Escalate if it continues", color:"#EF4444", text:"If their active resistance continues to undermine the team after reasonable engagement, escalate to HR as a performance and conduct matter." },
+    ],
+    phrases:["acknowledge institutional knowledge","involve in rollout","structured training","adoption is expected","escalate if undermining continues"]
+  },
+  {
+    id:29, cat:"A",
+    scenario:"Subordinate Disclosing Personal Crisis",
+    q:"A subordinate breaks down during a one-on-one meeting and discloses they are going through a severe personal crisis affecting their ability to work. What would you do?",
+    steps:[
+      { tag:"Listen with empathy", color:"#3B82F6", text:"Give them space to speak. Do not rush to 'fix'. Acknowledge what they're going through without judgment — your first role is to be present." },
+      { tag:"Signpost support", color:"#8B5CF6", text:"Point them to professional support — Employee Assistance Programme (EAP), occupational health, or HR welfare provisions." },
+      { tag:"Agree a temporary plan", color:"#10B981", text:"With their agreement, discuss a short-term adjusted workload arrangement. Be clear this is temporary and can be reviewed." },
+      { tag:"Inform supervisor", color:"#F59E0B", text:"Inform your supervisor (without unnecessary detail) that a team member is going through personal difficulties and a temporary arrangement is in place." },
+      { tag:"Follow up privately", color:"#EF4444", text:"Check in regularly — a brief 'how are you doing?' is enough. Do not treat them as a problem to be solved. Keep all discussions confidential." },
+    ],
+    phrases:["listen without rushing","Employee Assistance Programme","temporary adjusted workload","inform supervisor discreetly","confidentiality matters"]
+  },
+  {
+    id:30, cat:"A",
+    scenario:"Motivating a Disengaged Team",
+    q:"Your entire team seems collectively disengaged — low energy, minimal initiative, and a general sense of going through the motions. What would you do?",
+    steps:[
+      { tag:"Diagnose collectively", color:"#3B82F6", text:"Hold brief anonymous surveys or informal individual conversations to understand whether it's workload, lack of purpose, management issues, or external factors." },
+      { tag:"Communicate honestly", color:"#8B5CF6", text:"Address the team directly. Acknowledge the atmosphere, share what you've heard, and be transparent about what you can and cannot change." },
+      { tag:"Reconnect to purpose", color:"#10B981", text:"Remind the team of the impact of their work — real service outcomes, stories from the public. Meaning is the most powerful motivator." },
+      { tag:"Create quick wins", color:"#F59E0B", text:"Identify a visible, achievable team goal in the short term. Success generates momentum and a sense of shared accomplishment." },
+      { tag:"Structural changes", color:"#EF4444", text:"If workload or process issues are the root cause, address them concretely — not just through team-building activities. Escalate resource issues to your supervisor." },
+    ],
+    phrases:["anonymous survey first","acknowledge the atmosphere","reconnect to purpose","quick wins build momentum","address root cause not just symptoms"]
+  },
+
+  // ── CATEGORY B: CRISIS & EMERGENCY (Q31–34) ──
+  {
+    id:31, cat:"B",
+    scenario:"Data Breach Suspected",
+    q:"You receive a report suggesting that sensitive personal data held by your team may have been accessed by an unauthorised party. What would you do?",
+    steps:[
+      { tag:"Contain immediately", color:"#EF4444", text:"Suspend access to the affected system if possible without disrupting critical services. Preserve all logs and evidence — do not delete anything." },
+      { tag:"Escalate urgently", color:"#3B82F6", text:"Notify your supervisor and IT security immediately. A data breach may have legal implications — the Privacy Commissioner's Office may need to be notified." },
+      { tag:"Assess the scope", color:"#8B5CF6", text:"Work with IT to determine: what data was accessed, by whom, and how much. How many individuals are potentially affected?" },
+      { tag:"Notify affected parties", color:"#10B981", text:"If individuals' personal data was compromised, develop a plan to notify them — what happened, what you're doing, and what they should do." },
+      { tag:"Review and prevent", color:"#F59E0B", text:"Conduct a full post-incident review of data access controls. Update protocols, train staff, and document all response actions for accountability." },
+    ],
+    phrases:["preserve all evidence","notify Privacy Commissioner","assess scope first","notify affected individuals","post-incident access review"]
+  },
+  {
+    id:32, cat:"B",
+    scenario:"Staff Member Collapses at Work",
+    q:"During a busy work day, a staff member suddenly collapses at their desk and is unresponsive. What would you do?",
+    steps:[
+      { tag:"Call 999", color:"#EF4444", text:"Call emergency services (999) immediately. Do not delay. Delegate this task if needed so you can manage the situation." },
+      { tag:"First aid", color:"#3B82F6", text:"Deploy any first aid trained staff immediately. Follow their lead. Do not move the person unless they are in immediate danger." },
+      { tag:"Clear the area", color:"#10B981", text:"Clear bystanders — give emergency responders space and protect the dignity of the affected colleague." },
+      { tag:"Notify", color:"#8B5CF6", text:"Notify your supervisor immediately. Contact the staff member's emergency contact as soon as practicable." },
+      { tag:"Support the team", color:"#F59E0B", text:"Once the immediate emergency is managed, check in with colleagues who witnessed the incident — trauma responses are normal. Consider arranging counselling if needed." },
+    ],
+    phrases:["999 immediately","first aid personnel lead","protect dignity","emergency contact","trauma support for witnesses"]
+  },
+  {
+    id:33, cat:"B",
+    scenario:"Key Document Submitted with Wrong Information",
+    q:"You realise that a policy brief submitted by your team to a senior official earlier today contains factually incorrect information. What would you do?",
+    steps:[
+      { tag:"Act immediately", color:"#EF4444", text:"Do not wait. The longer incorrect information remains in circulation at a senior level, the greater the potential for damage to decisions and credibility." },
+      { tag:"Inform supervisor", color:"#3B82F6", text:"Notify your supervisor at once — clearly explain what the error is, its severity, and the correct information." },
+      { tag:"Issue a correction", color:"#8B5CF6", text:"Prepare a concise correction document. Your supervisor will determine the appropriate channel for resubmission — follow their lead." },
+      { tag:"Trace the error", color:"#10B981", text:"Identify how the error entered the document — data source, drafting error, review failure?" },
+      { tag:"Prevent recurrence", color:"#F59E0B", text:"Implement a formal checking procedure before any document leaves the team. Consider a mandatory two-person review for high-stakes documents." },
+    ],
+    phrases:["act immediately","do not wait","supervisor to determine correction channel","trace the source","two-person review going forward"]
+  },
+  {
+    id:34, cat:"B",
+    scenario:"IT System Failure During High-Stakes Presentation",
+    q:"You are presenting important data to senior management and your laptop and the presentation system both fail minutes before you begin. What would you do?",
+    steps:[
+      { tag:"Stay composed", color:"#3B82F6", text:"Do not panic visibly. Calmly acknowledge the technical issue and buy yourself a moment." },
+      { tag:"Explore alternatives fast", color:"#8B5CF6", text:"Ask colleagues to pull up the file on their device, use a room PC, or project from a phone. Check if a spare device is available in the room." },
+      { tag:"Offer to proceed without slides", color:"#10B981", text:"If technology cannot be restored quickly, offer to present verbally using a printed handout — or ask to reschedule briefly if content is too complex without visual support." },
+      { tag:"Deliver the key message", color:"#F59E0B", text:"Know your material well enough to deliver the three most important points without slides. This is what reassures senior management of your competence." },
+      { tag:"Review backup protocols", color:"#EF4444", text:"Afterwards, establish backup protocols for all important presentations: email deck in advance, bring USB copy, arrive early to test AV." },
+    ],
+    phrases:["stay composed","know your material cold","backup devices","offer to proceed verbally","establish AV protocols in advance"]
+  },
+
+  // ── CATEGORY C: PROJECT & PROCESS (Q35–39) ──
+  {
+    id:35, cat:"C",
+    scenario:"Stakeholder Disputes Project Direction Mid-way",
+    q:"A key stakeholder unexpectedly raises strong objections to the direction of a project you are midway through. What would you do?",
+    steps:[
+      { tag:"Listen fully", color:"#3B82F6", text:"Do not be defensive. Give them a proper hearing — their concern may be legitimate and may surface a genuine risk you hadn't considered." },
+      { tag:"Clarify the substance", color:"#8B5CF6", text:"Distinguish between: a factual misunderstanding that can be resolved with information, a valid concern requiring a course adjustment, or a stakeholder management issue." },
+      { tag:"Escalate to supervisor", color:"#EF4444", text:"A mid-project dispute from a key stakeholder is material. Inform your supervisor — they may need to be involved in managing the relationship." },
+      { tag:"Document", color:"#10B981", text:"Document all communications with the stakeholder. Keep a paper trail of the original brief and all subsequent changes." },
+      { tag:"Reassess the plan", color:"#F59E0B", text:"If the concern is substantive, formally reassess the project plan with your team and supervisor before proceeding. Changes must be agreed and signed off." },
+    ],
+    phrases:["listen without defensiveness","classify the concern","supervisor must know","document all communications","formal reassessment if substantive"]
+  },
+  {
+    id:36, cat:"C",
+    scenario:"Quality vs Speed Trade-off Under Deadline",
+    q:"Your supervisor wants your team to deliver a report at speed, but you believe the quality is not yet acceptable to submit. What would you do?",
+    steps:[
+      { tag:"Be specific", color:"#3B82F6", text:"Articulate your concern clearly and specifically — which sections have gaps, what the risk of submitting as-is is (e.g. factual errors, missing data). Do not be vague." },
+      { tag:"Quantify the time needed", color:"#8B5CF6", text:"Tell your supervisor exactly how long it would take to address the issues — not 'a bit more time' but '4 additional hours to verify Section 3 and add the financial data'." },
+      { tag:"Let them decide", color:"#10B981", text:"Present the trade-off clearly and let your supervisor make the final call — they may have context (e.g. a downstream meeting) that you don't." },
+      { tag:"Document your concern", color:"#F59E0B", text:"If the decision is to submit as-is despite your reservations, note your concern in writing for your own records." },
+      { tag:"Execute fully", color:"#EF4444", text:"Once the decision is made, execute it to the best of your ability without further resistance." },
+    ],
+    phrases:["specific not vague","quantify the time needed","supervisor's call to make","note concern in writing","execute without resistance"]
+  },
+  {
+    id:37, cat:"C",
+    scenario:"Cross-department Collaboration Not Working",
+    q:"You are leading a cross-departmental project but other departments are not responding to requests or meeting their deliverables. How would you handle this?",
+    steps:[
+      { tag:"Understand why", color:"#3B82F6", text:"Speak informally to the counterpart in each unresponsive department. Is it competing priorities, unclear expectations, or a people issue?" },
+      { tag:"Clarify responsibilities in writing", color:"#8B5CF6", text:"Ensure all departmental responsibilities and timelines are formally documented — a project brief or MOU. Verbal understandings do not hold." },
+      { tag:"Escalate within project structure", color:"#EF4444", text:"If informal engagement fails, escalate to your supervisor so they can raise the issue with the relevant department heads — peer-to-peer influence across departments." },
+      { tag:"Adjust the plan", color:"#10B981", text:"For deliverables that remain stuck, develop contingency plans — can your team take on the task? Can the timeline be adjusted?" },
+      { tag:"Post-project review", color:"#F59E0B", text:"After completion, propose clearer governance structures for future cross-departmental projects — defined ownership, escalation paths, and regular joint check-ins." },
+    ],
+    phrases:["understand before escalating","written responsibilities","escalate department head level","contingency plan for stuck items","governance structure for next time"]
+  },
+  {
+    id:38, cat:"C",
+    scenario:"You Disagree with a Colleague's Work Approach",
+    q:"A colleague of the same grade is leading a piece of work. You notice their approach is likely to lead to an ineffective outcome, but they report to a different line manager. What would you do?",
+    steps:[
+      { tag:"Reflect on your basis", color:"#3B82F6", text:"Ensure your concern is evidence-based, not just a difference of style. Consider: are you seeing a genuine risk, or a personal preference for a different approach?" },
+      { tag:"Speak to the colleague directly", color:"#8B5CF6", text:"Raise your concern directly with the colleague in a collaborative, non-judgmental way — 'I noticed X, have you considered Y?' Leave the decision with them." },
+      { tag:"Respect their autonomy", color:"#10B981", text:"If they disagree with your concern after hearing it, respect their decision. They are accountable for their own work." },
+      { tag:"Escalate carefully if risk is significant", color:"#F59E0B", text:"If you believe the outcome poses a genuine risk to the organisation or the public, flag it to your own supervisor — not theirs — as a matter of professional concern." },
+      { tag:"Document", color:"#EF4444", text:"If you escalated, note when and what you said, in case the issue later needs to be traced." },
+    ],
+    phrases:["evidence-based concern","raise directly first","respect their autonomy","escalate to your own supervisor","document if escalated"]
+  },
+  {
+    id:39, cat:"C",
+    scenario:"Receiving Contradictory Instructions",
+    q:"You have received a written instruction from your supervisor that contradicts an earlier standing policy. You are unsure which one to follow. What would you do?",
+    steps:[
+      { tag:"Do not act unilaterally", color:"#EF4444", text:"Pause before acting on either instruction. Acting on the wrong one could create problems that are hard to reverse." },
+      { tag:"Seek clarification", color:"#3B82F6", text:"Go back to your supervisor. Present both the existing policy and the new instruction factually and ask which should be followed." },
+      { tag:"Put it in writing", color:"#8B5CF6", text:"Seek confirmation of the correct instruction in writing — email is sufficient. This protects both you and your supervisor." },
+      { tag:"Flag the contradiction formally if needed", color:"#10B981", text:"If the contradiction is policy-level and has wider implications (not just for your team), suggest your supervisor formally clarify the policy for all affected staff." },
+      { tag:"Follow confirmed direction", color:"#F59E0B", text:"Once confirmed, follow the direction precisely and document that you sought clarification before acting." },
+    ],
+    phrases:["do not assume","seek written clarification","protect yourself and supervisor","flag policy-level contradiction","document the decision trail"]
+  },
+
+  // ── CATEGORY D: ETHICS & PUBLIC SERVICE (Q40–43) ──
+  {
+    id:40, cat:"D",
+    scenario:"Supervisor Asks You to Expedite Someone's Application",
+    q:"A supervisor who is not your direct line manager asks you informally to fast-track a specific individual's application, without giving any official justification. What would you do?",
+    steps:[
+      { tag:"Do not comply", color:"#EF4444", text:"Decline politely but firmly. Processing applications out of turn without proper justification is unfair to others and potentially a breach of civil service integrity obligations." },
+      { tag:"Ask for official justification", color:"#3B82F6", text:"If there is a legitimate reason (e.g. compassionate grounds), ask for it to be raised through official channels with your direct supervisor's knowledge." },
+      { tag:"Document the request", color:"#8B5CF6", text:"Note the date, what was requested, and who made the request. This protects you if the matter is ever queried." },
+      { tag:"Inform your supervisor", color:"#10B981", text:"Inform your direct supervisor of the request and how you responded. Do not keep it to yourself." },
+      { tag:"Consistent application", color:"#F59E0B", text:"Continue processing all applications fairly and in accordance with established procedures. Do not treat any application differently without formal authority to do so." },
+    ],
+    phrases:["decline politely but firmly","official justification required","document the request","inform your direct supervisor","consistent and fair processing"]
+  },
+  {
+    id:41, cat:"D",
+    scenario:"Noticing Possible Signs of Fraud in Expense Claims",
+    q:"While reviewing your team's expense records, you notice a pattern that suggests a subordinate may be submitting duplicate or inflated expense claims. What would you do?",
+    steps:[
+      { tag:"Gather evidence quietly", color:"#3B82F6", text:"Review the records carefully before drawing any conclusions. Cross-reference receipts, amounts and dates. Note the specific discrepancies." },
+      { tag:"Do not confront directly", color:"#EF4444", text:"Do not raise it with the subordinate directly — this could allow evidence to be destroyed and would compromise any subsequent investigation." },
+      { tag:"Report to supervisor or finance", color:"#8B5CF6", text:"Report your findings to your direct supervisor and the finance officer, clearly and factually. Present the evidence, not a conclusion." },
+      { tag:"Follow the formal process", color:"#10B981", text:"The matter should be investigated through proper internal procedures, potentially involving HR. Your role is to flag and cooperate, not to conduct the investigation yourself." },
+      { tag:"Maintain confidentiality", color:"#F59E0B", text:"Keep the matter strictly confidential. Do not discuss with other team members. Continue treating the subordinate professionally while the matter is handled." },
+    ],
+    phrases:["gather evidence quietly","do not confront directly","report to supervisor and finance","present evidence not conclusions","strict confidentiality"]
+  },
+  {
+    id:42, cat:"D",
+    scenario:"Being Asked to Sign Off Work You Haven't Checked",
+    q:"Your supervisor is under time pressure and asks you to sign off a document you have not had time to verify properly. What would you do?",
+    steps:[
+      { tag:"Do not sign blindly", color:"#EF4444", text:"Your signature attests to your review. Signing a document you have not checked could make you liable if errors are later found." },
+      { tag:"Communicate the risk", color:"#3B82F6", text:"Tell your supervisor directly: 'I have not had time to review this properly — I want to make sure you know I cannot verify its accuracy right now.'" },
+      { tag:"Propose a workable solution", color:"#8B5CF6", text:"Offer options: a rapid spot-check of the highest-risk sections, a short delay, or the supervisor signing in acknowledgement that full review was not possible." },
+      { tag:"Document your position", color:"#10B981", text:"If you are still required to sign, note in writing that you flagged the incomplete review. Keep a copy." },
+      { tag:"Never let pressure override judgement", color:"#F59E0B", text:"Time pressure is never a justification for bypassing accountability. Your professional integrity matters more than speed." },
+    ],
+    phrases:["your signature is your attestation","communicate the risk clearly","offer workable options","document your position","integrity over speed"]
+  },
+  {
+    id:43, cat:"D",
+    scenario:"Conflict of Interest — Family Member Applies",
+    q:"You discover that a close family member has applied for a grant or service your team administers. What would you do?",
+    steps:[
+      { tag:"Declare immediately", color:"#EF4444", text:"Declare the conflict of interest to your supervisor immediately, as soon as you become aware. Do not delay." },
+      { tag:"Recuse yourself", color:"#3B82F6", text:"Remove yourself from all decisions, discussions and processes relating to that application. This is non-negotiable." },
+      { tag:"Document the declaration", color:"#8B5CF6", text:"Record your declaration in writing and keep a copy. Follow any formal departmental declaration procedures." },
+      { tag:"Let the process proceed fairly", color:"#10B981", text:"The application should be processed on its merits by a colleague — neither disadvantaged nor favoured because of the relationship." },
+      { tag:"Consistency going forward", color:"#F59E0B", text:"Apply the same standard to perceived conflicts of interest, not just actual ones. When in doubt, declare and ask your supervisor." },
+    ],
+    phrases:["declare immediately","recuse yourself completely","document the declaration","process proceeds on merits","when in doubt declare"]
+  },
+
+  // ── CATEGORY E: EVENT MANAGEMENT (Q44–47) ──
+  {
+    id:44, cat:"E",
+    scenario:"Key AV Equipment Fails During Event",
+    q:"The audio system at a large public ceremony you are managing fails completely during the opening speech. What would you do?",
+    steps:[
+      { tag:"Signal the speaker discretely", color:"#3B82F6", text:"Discretely alert the speaker and ask them to pause. Do not interrupt abruptly — manage the disruption smoothly." },
+      { tag:"Deploy technical support", color:"#EF4444", text:"Direct your AV technician to the problem immediately. Simultaneously explore if a backup microphone or alternate system is available." },
+      { tag:"Communicate to the audience", color:"#10B981", text:"Calmly announce that there is a brief technical pause. Maintain composure — your demeanour sets the tone for the room." },
+      { tag:"Decision: proceed or reschedule", color:"#8B5CF6", text:"If the issue cannot be resolved in under five minutes, consult your supervisor on whether to proceed without amplification (for smaller venues) or restructure the programme." },
+      { tag:"Debrief and prevent", color:"#F59E0B", text:"After the event, require AV contractors to demonstrate full system testing at least 60 minutes before all future events." },
+    ],
+    phrases:["discrete speaker alert","composure sets the room tone","communicate calmly to audience","five-minute decision threshold","60-minute pre-event AV test"]
+  },
+  {
+    id:45, cat:"E",
+    scenario:"Venue Suddenly Unavailable Before Event",
+    q:"Three days before a large public event, you receive notice that the booked venue is no longer available due to an emergency renovation. What would you do?",
+    steps:[
+      { tag:"Escalate immediately", color:"#EF4444", text:"Inform your supervisor immediately. This is a material risk that requires a senior decision on whether to postpone or relocate." },
+      { tag:"Explore alternative venues", color:"#3B82F6", text:"Begin an urgent search for alternative venues of appropriate capacity and accessibility. Contact confirmed contacts first, then broaden the search." },
+      { tag:"Assess feasibility of postponement", color:"#8B5CF6", text:"Assess whether the event can be postponed — what are the contractual, reputational, and logistical implications?" },
+      { tag:"Communicate to participants", color:"#10B981", text:"Once a decision is made, communicate to all registered participants immediately and personally — email, phone for VIP attendees. Do not let them find out on the day." },
+      { tag:"Document all decisions", color:"#F59E0B", text:"Record all decisions, alternatives considered, and communications for accountability. Review venue booking protocols to include contingency clauses in contracts." },
+    ],
+    phrases:["escalate immediately","urgent venue search","postponement feasibility","communicate before they find out","contingency clause in contracts"]
+  },
+  {
+    id:46, cat:"E",
+    scenario:"VIP Guest Arrives with Unexpected Extra Guests",
+    q:"A VIP attendee arrives at your event with several unregistered guests, demanding entry for all of them. What would you do?",
+    steps:[
+      { tag:"Welcome warmly", color:"#3B82F6", text:"Greet the VIP warmly and professionally. Do not create tension at the entry point — handle this discreetly." },
+      { tag:"Consult quickly", color:"#8B5CF6", text:"Step aside briefly to consult your supervisor or the most senior available official on whether the guests can be accommodated." },
+      { tag:"Check capacity and seating", color:"#10B981", text:"Assess whether the venue can accommodate the extra guests safely and practically — are there reserved seats available?" },
+      { tag:"Accommodate graciously if possible", color:"#F59E0B", text:"If accommodation is possible, welcome the guests and arrange seats. Express thanks for the VIP's attendance." },
+      { tag:"Decline professionally if needed", color:"#EF4444", text:"If it is truly not possible, apologise sincerely and explain the constraint professionally. Offer the VIP the option to contact the organiser to formalise future arrangements." },
+    ],
+    phrases:["handle discreetly","consult supervisor quickly","capacity and safety check","accommodate graciously if possible","decline professionally if not"]
+  },
+  {
+    id:47, cat:"E",
+    scenario:"Event Running Significantly Behind Schedule",
+    q:"Your team's large public event is running 45 minutes behind schedule mid-way through, and the finishing time cannot be extended. What would you do?",
+    steps:[
+      { tag:"Assess the programme", color:"#3B82F6", text:"Quickly review the remaining programme with your supervisor. Identify which items are essential and which can be shortened or cut." },
+      { tag:"Brief speakers and facilitators", color:"#EF4444", text:"Immediately brief all upcoming speakers — they must adhere to shorter time slots. Be direct but courteous: give specific time limits." },
+      { tag:"Inform the audience", color:"#8B5CF6", text:"Make a brief, professional announcement: 'To ensure we conclude on time, we will be slightly adjusting the remaining programme.'" },
+      { tag:"Cut low-priority items", color:"#10B981", text:"Remove or consolidate non-essential items — networking breaks, award segments, or repetitive sections. Protect the core content." },
+      { tag:"Communicate to affected parties", color:"#F59E0B", text:"If any segment was cut that affected a contributor, follow up personally after the event to explain and apologise." },
+    ],
+    phrases:["essential vs cuttable items","brief speakers with specific time limits","professional audience announcement","protect core content","follow up with affected contributors"]
+  },
+
+  // ── CATEGORY F: MIXED (Q48–50) ──
+  {
+    id:48, cat:"F",
+    scenario:"Supervisor Away — Unexpected Decision Required",
+    q:"Your supervisor is on leave and an urgent decision arises that is outside your delegated authority. You cannot immediately reach your supervisor. What would you do?",
+    steps:[
+      { tag:"Try to reach the supervisor", color:"#3B82F6", text:"Make a genuine effort to contact them — phone, message. For genuinely urgent matters, this is appropriate even during leave." },
+      { tag:"Identify the acting authority", color:"#8B5CF6", text:"Check whether a designated acting supervisor has been appointed, or whether there is a clear chain of command to follow." },
+      { tag:"Take only protective action", color:"#EF4444", text:"If the situation is deteriorating and waiting will cause irreversible harm, take the minimum protective action needed — and document every step." },
+      { tag:"Document everything", color:"#10B981", text:"Record the situation, the options you considered, who you tried to contact, and what action you took and why." },
+      { tag:"Debrief when supervisor returns", color:"#F59E0B", text:"Fully brief your supervisor on return. Suggest that a clear acting authority arrangement be documented for future absences." },
+    ],
+    phrases:["try to reach supervisor first","acting authority chain","minimum protective action only","document every step","debrief on return"]
+  },
+  {
+    id:49, cat:"F",
+    scenario:"Colleague Takes Credit for Your Idea",
+    q:"In a meeting with senior management, a colleague presents your idea as their own without crediting you. What would you do?",
+    steps:[
+      { tag:"Stay calm in the moment", color:"#3B82F6", text:"Do not react visibly or emotionally in the meeting. You do not have full information on whether it was intentional, and a public confrontation would reflect poorly on you." },
+      { tag:"After the meeting — speak privately", color:"#8B5CF6", text:"Speak to the colleague privately, calmly, and factually: 'I noticed the idea you presented was something we had discussed — I would appreciate being credited going forward.'" },
+      { tag:"Rebuild visibility proactively", color:"#10B981", text:"Ensure your ideas are documented and shared in writing before meetings — emails, briefing notes. This builds a paper trail that protects you." },
+      { tag:"Involve supervisor if it recurs", color:"#F59E0B", text:"If the behaviour is repeated, raise it with your supervisor as a professional concern — not a personal complaint." },
+      { tag:"Build a documentation habit", color:"#EF4444", text:"Make it routine to circulate your ideas and contributions in writing. This is a professional habit, not just self-protection." },
+    ],
+    phrases:["stay calm in the meeting","private not public confrontation","document ideas before meetings","escalate only if it recurs","paper trail as professional habit"]
+  },
+  {
+    id:50, cat:"F",
+    scenario:"Told to Reduce Headcount — You Disagree",
+    q:"Your department has instructed you to identify one role in your team for redundancy. You believe losing any team member will seriously compromise service delivery. What would you do?",
+    steps:[
+      { tag:"Evidence first", color:"#3B82F6", text:"Build a clear, factual case: document each team member's role, current workload, service output contribution, and what would happen to service delivery if each role were removed." },
+      { tag:"Present the case formally", color:"#8B5CF6", text:"Present your analysis to your supervisor formally — not as a resistance to the directive, but as the information they need to make an informed decision." },
+      { tag:"Propose alternatives", color:"#10B981", text:"Suggest alternatives that achieve savings without headcount reduction — e.g. a vacancy freeze, redistribution of roles, or process efficiencies." },
+      { tag:"Accept the final decision", color:"#F59E0B", text:"If, having heard your case, the decision stands, accept it professionally. Your role then shifts to managing the transition fairly and supportively." },
+      { tag:"Fair and transparent process", color:"#EF4444", text:"If a redundancy must proceed, ensure the selection process is fully compliant with HR procedures, fair, and transparent. Support the affected staff member." },
+    ],
+    phrases:["evidence-based case","formal presentation not resistance","propose alternatives first","accept decision professionally","fair and transparent redundancy process"]
   },
 ];
 
